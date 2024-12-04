@@ -14,7 +14,6 @@ class Player(ABC):
     def __init__(self, name: str):
         self.name = name
 
-        self.stats = {
-            stat: self.generate_stat(values["mean"], values["std"])
-            for stat, values in self.stat_metadata().items()
-        }
+        for stat, values in self.stat_metadata().items():
+            stat_value = self.generate_stat(values["mean"], values["std"])
+            setattr(self, stat, stat_value)
